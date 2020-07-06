@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import NewsItem from "./NewsItem";
 
 const TOP_NEWS_QUERY = gql`
   query TopNewsQuery {
@@ -8,6 +9,7 @@ const TOP_NEWS_QUERY = gql`
       title
       urlToImage
       description
+      url
     }
   }
 `;
@@ -15,15 +17,40 @@ const TOP_NEWS_QUERY = gql`
 export class TopNews extends Component {
   render() {
     return (
-      <div className="container">
+      <Fragment>
         <h2>Top news from US:</h2>
-        <div class="card border-primary mb-3" style={{ maxWidth: "20rem" }}>
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-          </div>
-        </div>
-      </div>
+
+        <Query query={TOP_NEWS_QUERY}>
+          {({ loading, error, data }) => {
+            if (loading)
+              return (
+                <div class="progress">
+                  <div
+                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    aria-valuenow="75"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style={{ width: "75%" }}
+                  ></div>
+                </div>
+              );
+            if (error) console.log(error);
+            //console.log(data);
+
+            return (
+              <div class="card-deck">
+                {data.top_news.map((news_item) => (
+                  <NewsItem
+                    key={news_item.title}
+                    news_item={news_item}
+                  ></NewsItem>
+                ))}
+              </div>
+            );
+          }}
+        </Query>
+      </Fragment>
     );
   }
 }
