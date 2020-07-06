@@ -1,0 +1,29 @@
+{
+  "name": "top_news",
+  "version": "1.0.0",
+  "description": "App that lists top news from GB and US from news API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stolebudisava/top_news.git"
+  },
+  "author": "Stojan Mitric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stolebudisava/top_news/issues"
+  },
+  "homepage": "https://github.com/stolebudisava/top_news#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "express-graphql": "^0.10.2",
+    "graphql": "^15.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
