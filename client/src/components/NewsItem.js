@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function NewsItem({
   news_item: { title, urlToImage, description, url },
@@ -10,9 +11,9 @@ export default function NewsItem({
         <div class="card-body">
           <img class="card-img-top" src={urlToImage} alt="Card image cap"></img>
           <p class="card-text">{description}</p>
-          <a href={url} class="card-link">
+          <Link to={`/moreDetails/${title}`} class="card-link">
             More
-          </a>
+          </Link>
         </div>
       </div>
     </div>
