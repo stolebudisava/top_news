@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import NewsItem from "./NewsItem";
+import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 const CATEGORIES_QUERY = gql`
   query CategoriesQuery(
@@ -22,14 +24,18 @@ const CATEGORIES_QUERY = gql`
 `;
 
 export class Categories extends Component {
-  state = {
-    country: "us",
-    category: "entertainment",
-  };
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      country: "",
+      category: "entertainment",
+    };
+  }
   render() {
     return (
       <Fragment>
+        <Navbar></Navbar>
         <Query
           query={CATEGORIES_QUERY}
           variables={{
@@ -41,9 +47,9 @@ export class Categories extends Component {
           {({ loading, error, data }) => {
             if (loading)
               return (
-                <div class="progress">
+                <div className="progress">
                   <div
-                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    className="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
                     aria-valuenow="75"
                     aria-valuemin="0"
@@ -62,7 +68,7 @@ export class Categories extends Component {
                 <br></br>
                 <div>
                   <select
-                    class="form-control"
+                    className="form-control"
                     id="categorySelect"
                     value={this.state.category}
                     onChange={(event) =>
@@ -83,7 +89,7 @@ export class Categories extends Component {
                 <br></br>
                 <div>
                   <select
-                    class="form-control"
+                    className="form-control"
                     id="countrySelect"
                     value={this.state.country}
                     onChange={(event) =>
@@ -97,12 +103,12 @@ export class Categories extends Component {
                   </select>
                 </div>
                 <br></br>
-                <h2>
+                <h3>
                   Top 5 news from {this.state.category} category in
                   {" " + this.state.country.toUpperCase()}:
-                </h2>
+                </h3>
                 <br></br>
-                <div class="card-deck">
+                <div className="card-deck">
                   {data.country_category.map((news_item) => (
                     <NewsItem
                       key={news_item.title}
@@ -114,6 +120,10 @@ export class Categories extends Component {
             );
           }}
         </Query>
+
+        <Link to="/" className="btn btn-secondary my-2 my-sm-0">
+          Back to top news
+        </Link>
       </Fragment>
     );
   }

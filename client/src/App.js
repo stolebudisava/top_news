@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import Navbar from "./components/Navbar";
 import Categories from "./components/Categories";
 import SearchNews from "./components/SearchNews";
 import TopNews from "./components/TopNews";
@@ -13,12 +12,32 @@ const client = new ApolloClient({
 });
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handler = this.handler.bind(this);
+
+    this.state = {
+      country: "us",
+    };
+  }
+
+  handler() {
+    if (this.state.country === "us") {
+      this.setState({
+        country: "gb",
+      });
+    } else {
+      this.setState({
+        country: "us",
+      });
+    }
+  }
   render() {
     return (
       <ApolloProvider client={client}>
         <Router>
           <div className="container">
-            <Navbar action={this.handler}></Navbar>
             <br></br>
             <br></br>
             <Route exact path="/" component={TopNews}></Route>

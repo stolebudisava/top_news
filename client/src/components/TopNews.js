@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import NewsItem from "./NewsItem";
+import Navbar from "./Navbar";
 
 const TOP_NEWS_QUERY = gql`
   query TopNewsQuery($country: String!) {
@@ -15,12 +16,30 @@ const TOP_NEWS_QUERY = gql`
 `;
 
 export default class TopNews extends Component {
-  state = {
-    country: "us",
-  };
+  constructor(props) {
+    super(props);
+
+    this.handler = this.handler.bind(this);
+
+    this.state = {
+      country: "us",
+    };
+  }
+  handler() {
+    if (this.state.country === "us") {
+      this.setState({
+        country: "gb",
+      });
+    } else {
+      this.setState({
+        country: "us",
+      });
+    }
+  }
   render() {
     return (
       <Fragment>
+        <Navbar action={this.handler}></Navbar>
         <Query
           query={TOP_NEWS_QUERY}
           variables={{
@@ -30,9 +49,9 @@ export default class TopNews extends Component {
           {({ loading, error, data }) => {
             if (loading)
               return (
-                <div class="progress">
+                <div className="progress">
                   <div
-                    class="progress-bar progress-bar-striped progress-bar-animated"
+                    className="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
                     aria-valuenow="75"
                     aria-valuemin="0"
@@ -42,7 +61,6 @@ export default class TopNews extends Component {
                 </div>
               );
             if (error) console.log(error);
-            console.log(data);
 
             return (
               <div>
@@ -51,7 +69,7 @@ export default class TopNews extends Component {
                 <br></br>
                 <div>
                   <select
-                    class="form-control"
+                    className="form-control"
                     id="countrySelect"
                     value={this.state.country}
                     onChange={(event) =>
@@ -70,7 +88,7 @@ export default class TopNews extends Component {
                   {" " + this.state.country.toUpperCase()}:
                 </h3>
                 <br></br>
-                <div class="card-deck">
+                <div className="card-deck">
                   {data.top_news.map((news_item) => (
                     <NewsItem
                       key={news_item.title}

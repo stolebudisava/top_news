@@ -5,9 +5,12 @@ class Navbar extends Component {
   render() {
     return (
       <div className="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+          <Link className="navbar-brand" to="/">
+            News
+          </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler collapsed"
             type="button"
             data-toggle="collapse"
             data-target="#navbarColor01"
@@ -15,22 +18,22 @@ class Navbar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
+          <div className="navbar-collapse collapse show" id="navbarColor01">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
                 <Link to="/" className="nav-link">
-                  Top news <span class="sr-only"></span>
+                  Top news <span className="sr-only"></span>
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/categories" className="nav-link">
                   Categories
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/search" className="nav-link">
                   Search
                 </Link>
@@ -39,14 +42,14 @@ class Navbar extends Component {
 
             <button
               onClick={this.props.action}
-              class="btn btn-secondary my-2 my-sm-0"
+              className="btn btn-secondary my-2 my-sm-0"
             >
               US
             </button>
             <span style={{ marginRight: "10px" }}></span>
             <button
               onClick={this.props.action}
-              class="btn btn-secondary my-2 my-sm-0"
+              className="btn btn-secondary my-2 my-sm-0"
             >
               GB
             </button>
