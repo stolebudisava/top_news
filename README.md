@@ -1,10 +1,19 @@
-This is readme file for topnews app.
+```bash
+# Install dependencies (server & client)
+npm install
+cd client && npm install
 
-Instructions:
+# Run server & client (:3000 & :5000)
+npm run dev
 
-_npm install_ in root folder(top_news)
-_npm install_ in folder client
+# Server only (:5000)
+npm run server
 
-app is run from root folder(top news) through concurrently(both graphql server and client app) with:
+# Client only (:3000)
+npm run client
 
-_npm run dev_
+# Build for production (Builds into server ./public)
+cd client && npm run build
+
+# Graphiql - http://localhost:5000/graphql
+```
