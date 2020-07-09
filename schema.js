@@ -4,10 +4,10 @@ const {
   GraphQLString,
   GraphQLList,
   GraphQLSchema,
+  GraphQLInt,
 } = require("graphql");
 
 const API_KEY = "6c434fc0ca404bf387eecdff7219a1cd";
-const COUNTRY = "us";
 
 //TopNews
 
@@ -27,16 +27,6 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     top_news: {
       type: new GraphQLList(TopNewsType),
-      resolve(parent, arg) {
-        return axios
-          .get(
-            `https://newsapi.org/v2/top-headlines?country=${COUNTRY}&apiKey=${API_KEY}`
-          )
-          .then((res) => res.data.articles);
-      },
-    },
-    top_news_by_country: {
-      type: TopNewsType,
       args: {
         country: { type: GraphQLString },
       },
@@ -45,7 +35,22 @@ const RootQuery = new GraphQLObjectType({
           .get(
             `https://newsapi.org/v2/top-headlines?country=${args.country}&apiKey=${API_KEY}`
           )
-          .then((res) => res.data);
+          .then((res) => res.data.articles);
+      },
+    },
+    country_category: {
+      type: new GraphQLList(TopNewsType),
+      args: {
+        country: { type: GraphQLString },
+        category: { type: GraphQLString },
+        pageSize: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://newsapi.org/v2/top-headlines?country=${args.country}&category=${args.category}&pageSize=${args.pageSize}&apiKey=${API_KEY}`
+          )
+          .then((res) => res.data.articles);
       },
     },
   },

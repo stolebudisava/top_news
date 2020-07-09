@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export class Navbar extends Component {
+class Navbar extends Component {
   render() {
     return (
       <div className="container">
@@ -20,31 +21,35 @@ export class Navbar extends Component {
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">
-                  Top news <span class="sr-only">(current)</span>
-                </a>
+                <Link to="/" className="nav-link">
+                  Top news <span class="sr-only"></span>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link to="/categories" className="nav-link">
                   Categories
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link to="/search" className="nav-link">
                   Search
-                </a>
+                </Link>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input
-                class="form-control mr-sm-2"
-                type="text"
-                placeholder="Search"
-              ></input>
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-                Search
-              </button>
-            </form>
+
+            <button
+              onClick={this.props.action}
+              class="btn btn-secondary my-2 my-sm-0"
+            >
+              US
+            </button>
+            <span style={{ marginRight: "10px" }}></span>
+            <button
+              onClick={this.props.action}
+              class="btn btn-secondary my-2 my-sm-0"
+            >
+              GB
+            </button>
           </div>
         </nav>
       </div>
