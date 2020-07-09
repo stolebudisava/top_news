@@ -6,9 +6,6 @@ class Navbar extends Component {
     return (
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <Link className="navbar-brand" to="/">
-            News
-          </Link>
           <button
             className="navbar-toggler collapsed"
             type="button"

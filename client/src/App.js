@@ -9,30 +9,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
+  //uri:/graphql -for production
 });
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handler = this.handler.bind(this);
-
-    this.state = {
-      country: "us",
-    };
-  }
-
-  handler() {
-    if (this.state.country === "us") {
-      this.setState({
-        country: "gb",
-      });
-    } else {
-      this.setState({
-        country: "us",
-      });
-    }
-  }
   render() {
     return (
       <ApolloProvider client={client}>
